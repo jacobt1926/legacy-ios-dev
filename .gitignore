@@ -1,0 +1,17 @@
+# Theos build artifacts
+.theos/
+packages/
+*.deb
+*.o
+*.dSYM/
+
+# Environment variables and credentials
+.env
+.env.*
+*.pem
+*.key
+
+# Editor and OS files
+.vscode/
+.DS_Store
+Thumbs.db
