@@ -31,7 +31,7 @@
         @"Memory: %.0f MB\n"
         @"Battery: %.0f%%\n"
         @"Uptime: %.2f hours\n\n"
-        @"Built with Objective-C",
+        @"Built by Jacob",
         device.model,
         device.systemVersion,
         memory,
