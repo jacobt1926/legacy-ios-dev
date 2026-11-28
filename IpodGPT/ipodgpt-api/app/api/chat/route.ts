@@ -22,7 +22,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    const { message } = await request.json();
+    const { message, history = [] } = await request.json();
 
     if (
       typeof message !== "string" ||
@@ -35,6 +35,43 @@ export async function POST(request: Request) {
       );
     }
 
+    if (!Array.isArray(history) || history.length > 20) {
+        return Response.json(
+            { error: "Invalid conversation history" },
+            { status: 400 }
+        );
+    }
+
+    const input: {
+        role: "user" | "assistant";
+        content: string;
+    }[] = [];
+
+    for (const item of history) {
+    if (
+        !item ||
+        (item.role !== "user" && item.role !== "assistant") ||
+        typeof item.content !== "string"
+    ) {
+        return Response.json(
+        { error: "Invalid history message" },
+        { status: 400 }
+        );
+    }
+
+    input.push({
+        role: item.role,
+        content: item.content.slice(0, 12000)
+    });
+    }
+
+    input.push({
+        role: "user",
+        content: message
+    });
+
+
+
     const openai = new OpenAI({
       apiKey: process.env.OPENAI_API_KEY
     });
@@ -43,7 +80,7 @@ export async function POST(request: Request) {
       model: process.env.OPENAI_MODEL || "gpt-6-luna",
       instructions:
         "You are PocketGPT, an AI assistant running on a legacy iPod Touch. Provide helpful, concise responses suitable for a small screen.",
-      input: message,
+      input: input,
       max_output_tokens: 1000,
       store: false
     });

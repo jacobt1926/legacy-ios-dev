@@ -1,4 +1,5 @@
 .theos/
 packages/
 .DS_Store
-.env.local
+.env.localIPGSecrets.h
+IPGSecrets.h

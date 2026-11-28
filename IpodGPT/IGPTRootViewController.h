@@ -1,5 +1,5 @@
 #import <UIKit/UIKit.h>
 
-@interface IGPTRootViewController : UITableViewController
+@interface IGPTRootViewController : UIViewController
 
 @end

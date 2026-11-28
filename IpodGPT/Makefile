@@ -10,7 +10,7 @@ include $(THEOS)/makefiles/common.mk
 APPLICATION_NAME = IpodGPT
 
 IpodGPT_FILES = main.m IGPTAppDelegate.m IGPTRootViewController.m
-IpodGPT_FRAMEWORKS = UIKit CoreGraphics
+IpodGPT_FRAMEWORKS = UIKit CoreGraphics QuartzCore
 IpodGPT_CFLAGS = -fobjc-arc
 
 include $(THEOS_MAKE_PATH)/application.mk
